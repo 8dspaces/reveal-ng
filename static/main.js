@@ -38,11 +38,12 @@
         //$sceProvider.enabled(false);
 
         return $routeProvider.when("/", {
-            templateUrl: "/template/home.html"
+
+            templateUrl: "/template/home.html",
             //templateUrl: "/template/home.html",
         }).when("/post/:name", {
             templateUrl: "/posts/base.html",
-            controller: 'postCtrl'
+            controller: 'postCtrl',
             //templateUrl: "/template/post.html"
         }).otherwise({
             redirectTo: "/",
@@ -108,11 +109,11 @@
     };
 
     postCtrl = function($scope, $http, $routeParams, $sce) {
-        $scope.name = $routeParams.name;
+        $scope.name = $sce.trustAsResourceUrl('/template/' + $routeParams.name)
+        //$scope.srcname = $sce.trustAsJs($routeParams.name);
 
-        $scope.$on('$viewContentLoaded', function(){
-
-            
+        /*
+        $scope.$on('$viewContentLoaded', function(){            
 
             Reveal.initialize({
                 controls: true,
@@ -124,7 +125,7 @@
 
                 // Optional reveal.js plugins
                 dependencies: [
-                    //{ src: 'bower_components/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'bower_components/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
                     { src: 'bower_components/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'bower_components/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
                     { src: 'bower_components/reveal/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
@@ -133,10 +134,13 @@
                     { src: 'bower_components/reveal/plugin/tagcloud/tagcloud.js', async: true } 
                 ]
             });
-            alert("123");
+            
         });
-
-        return $http.get('/posts/' + $scope.name).success(function(data) {
+*/
+        console.log($scope.name );
+        //return $http.get('/posts/' + $scope.name).success(function(data) {
+        
+        return $http.get('/template/' + $scope.name).success(function(data) {
 
             //return $scope.post = parsePost(data);
             //alert(data);
@@ -146,8 +150,9 @@
             //return $scope.post = data;
             //alert("123");
             //$('.slides').innerHtml=
+            //console.log($sce.trustAsHtml(data).toString());
             return $scope.post = $sce.trustAsHtml(data);
-
+        
         });
     };
 

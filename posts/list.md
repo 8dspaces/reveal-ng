@@ -1,8 +1,8 @@
-title: COOOLLLL
-url: 456.html
+title: Welcome
+url: home.html
 -------
-title: 123
-url: 123.html
+title: Project 1 Demo
+url: project1.html
 -------
-title: 欢迎入伙
-url: welcome.md
+title: Project 2 Demo
+url: project2.html

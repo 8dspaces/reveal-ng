@@ -7,7 +7,7 @@ app = Flask(__name__)
 # @app.route('/guide/post/<name>')
 # @app.route('/guide')
 
-# @app.route('/post/<name>')
+#@app.route('/post/<name>')
 @app.route('/')
 def post_name(name=""):
     return send_file('index.html')
