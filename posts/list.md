@@ -6,3 +6,7 @@ url: project1.html
 -------
 title: Project 2 Demo
 url: project2.html
+-------
+title: UPC Projects
+url: projects.html
+

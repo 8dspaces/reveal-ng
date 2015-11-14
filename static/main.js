@@ -39,15 +39,16 @@
 
         return $routeProvider.when("/", {
 
-            templateUrl: "/template/home.html",
+            templateUrl: "/posts/base.html",
             //templateUrl: "/template/home.html",
-        }).when("/post/:name", {
+        }).when("/post/:name/", {
             templateUrl: "/posts/base.html",
             controller: 'postCtrl',
-            //templateUrl: "/template/post.html"
         }).otherwise({
             redirectTo: "/",
         });
+
+        $locationProvider.html5Mode(true);
     });
 
     parseTitle = function(data) {
@@ -109,51 +110,23 @@
     };
 
     postCtrl = function($scope, $http, $routeParams, $sce) {
-        $scope.name = $sce.trustAsResourceUrl('/template/' + $routeParams.name)
+        $scope.src_name = $sce.trustAsResourceUrl('/template/' + $routeParams.name)
         //$scope.srcname = $sce.trustAsJs($routeParams.name);
 
-        /*
-        $scope.$on('$viewContentLoaded', function(){            
-
-            Reveal.initialize({
-                controls: true,
-                progress: true,
-                history: true,
-                center: true,
-
-                //transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-                // Optional reveal.js plugins
-                dependencies: [
-                    { src: 'bower_components/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: 'bower_components/reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: 'bower_components/reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: 'bower_components/reveal/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: 'bower_components/reveal/plugin/zoom-js/zoom.js', async: true },
-                    { src: 'bower_components/reveal/plugin/notes/notes.js', async: true },
-                    { src: 'bower_components/reveal/plugin/tagcloud/tagcloud.js', async: true } 
-                ]
-            });
-            
-        });
-*/
-        console.log($scope.name );
+        console.log(!$routeParams.name);
+        console.log($routeParams.name)
         //return $http.get('/posts/' + $scope.name).success(function(data) {
-        
-        return $http.get('/template/' + $scope.name).success(function(data) {
 
-            //return $scope.post = parsePost(data);
-            //alert(data);
-            //alert($sce.isEnabled())
-            //return $scope.post = $sce.getTrustedHtml(data);
-            //return $scope.post = $sce.trustAsHtml(data);
-            //return $scope.post = data;
-            //alert("123");
-            //$('.slides').innerHtml=
-            //console.log($sce.trustAsHtml(data).toString());
-            return $scope.post = $sce.trustAsHtml(data);
+        return $http.get('/template/' + $routeParams.name).success(function(data) {
+
+                //return $scope.post = $sce.getTrustedHtml(data);
+                //return $scope.post = $sce.trustAsHtml(data);
+
+                //console.log(data);
+                return $scope.post = $sce.trustAsHtml(data);
+            
+            });
         
-        });
     };
 
 // Blog.controller('PostsController', function ($scope, $http, $sce) {

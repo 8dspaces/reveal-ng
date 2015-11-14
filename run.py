@@ -7,7 +7,7 @@ app = Flask(__name__)
 # @app.route('/guide/post/<name>')
 # @app.route('/guide')
 
-#@app.route('/post/<name>')
+@app.route('/post/<name>')
 @app.route('/')
 def post_name(name=""):
     return send_file('index.html')
@@ -16,9 +16,9 @@ def post_name(name=""):
 def post_test(name=""):
     return send_file('test.html')
 
-@app.route('/<id>')
-def route_id(id):
-    return flask.request.path
+# @app.route('/<id>')
+# def route_id(id):
+#     return flask.request.path
 
 @app.route('/bower_components/<path:path>')
 def bower_components(path):
