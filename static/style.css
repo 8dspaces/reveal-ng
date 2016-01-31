@@ -367,7 +367,7 @@ a {
     }
 
     #main {
-        position: fixed;
+        position: fixed; 
         top: 40px;
         right: 60px;
         bottom: 0;
